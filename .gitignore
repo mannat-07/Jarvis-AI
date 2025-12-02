@@ -1,0 +1,85 @@
+# Python cache files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual environment
+.venv/
+venv/
+ENV/
+env/
+
+# Environment variables (contains API keys)
+.env
+*.env
+
+# Temporary code runner files
+Backend/tempCodeRunnerFile.py
+Frontend/tempCodeRunnerFile.py
+tempCodeRunnerFile.py
+
+# Data files (chat logs, user data)
+Data/ChatLog.json
+Data/*.json
+Data/*.txt
+Data/*.mp3
+Data/speech.mp3
+
+# Generated images
+Data/*.jpg
+Data/*.png
+Data/*.jpeg
+
+# Frontend temporary files
+Frontend/Files/*.data
+Frontend/Files/MicrophoneStatus.data
+Frontend/Files/Status.data
+Frontend/Files/Responses.data
+Frontend/Files/Database.data
+Frontend/Files/ImageGeneration.data
+
+# IDE settings
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+logs/
+
+# Selenium/Chrome driver files
+chromedriver.exe
+geckodriver.exe
+
+# PyQt compiled files
+*.qrc
+*.ui~
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# pytest
+.pytest_cache/
+.coverage
+htmlcov/
+
+# MyPy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
