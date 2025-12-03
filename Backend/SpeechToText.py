@@ -2,7 +2,6 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
-from webdriver_manager.chrome import ChromeDriverManager
 from dotenv import dotenv_values
 import os
 import mtranslate as mt
@@ -63,9 +62,16 @@ chrome_options.add_argument(f'user-agent={user_agent}')
 chrome_options.add_argument("--use-fake-ui-for-media-stream")
 chrome_options.add_argument("--use-fake-device-for-media-stream")
 chrome_options.add_argument("--headless=new")
+chrome_options.add_argument("--log-level=3")  # Suppress logs
+chrome_options.add_experimental_option('excludeSwitches', ['enable-logging'])
 
-service = Service(ChromeDriverManager().install())
-driver = webdriver.Chrome(service=service, options=chrome_options)
+# Use Chrome directly without webdriver_manager
+try:
+    driver = webdriver.Chrome(options=chrome_options)
+except Exception as e:
+    print(f"Error initializing Chrome: {e}")
+    print("Make sure Chrome is installed and in your PATH")
+    raise
 
 TempDirPath = rf"{current_dir}/Frontend/Files"
 

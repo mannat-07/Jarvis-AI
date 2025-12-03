@@ -87,35 +87,61 @@ def PlayYoutube(query):
     return True
 
 def OpenApp(app, sess=requests.session()):
+    # Handle common websites directly
+    website_map = {
+        'youtube': 'https://www.youtube.com',
+        'google': 'https://www.google.com',
+        'gmail': 'https://mail.google.com',
+        'facebook': 'https://www.facebook.com',
+        'twitter': 'https://www.twitter.com',
+        'instagram': 'https://www.instagram.com',
+        'reddit': 'https://www.reddit.com',
+        'github': 'https://www.github.com'
+    }
+    
+    app_lower = app.lower().strip()
+    
+    # Check if it's a known website
+    if app_lower in website_map:
+        webopen(website_map[app_lower])
+        return True
+    
+    # Try to open as installed app
     try:
         appopen(app, match_closest=True, output=True, throw_error=True)
         return True
     
     except:
+        # Fallback: search Google and open first result
         def extract_links(html):
             if html is None:
                 return []
             soup = BeautifulSoup(html, 'html.parser')
             links = soup.find_all('a', {'jsname': 'UWckNb'})
-            return [link.get('href') for link in links]
+            extracted = [link.get('href') for link in links if link.get('href')]
+            return extracted
         
         def search_google(query):
             url = f"https://www.google.com/search?q={query}"
             headers = {"User-Agent": useragent}
-            response = sess.get(url, headers)
-
-            if response.status_code == 200:
-                return response.text
-            else:
-                print("Failed to retrieve search results.")
+            try:
+                response = sess.get(url, headers=headers, timeout=5)
+                if response.status_code == 200:
+                    return response.text
+            except:
+                pass
             return None
         
         html = search_google(app)
 
         if html:
-            link = extract_links(html)[0]
-            webopen(link)
-
+            links = extract_links(html)
+            if links and len(links) > 0:
+                webopen(links[0])
+                return True
+        
+        # Last resort: just search for it
+        webopen(f"https://www.google.com/search?q={app}")
         return True
     
 def CloseApp(app):

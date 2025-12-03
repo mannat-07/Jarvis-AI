@@ -12,6 +12,10 @@ A powerful AI-powered virtual assistant with voice recognition, natural language
 - 🚀 **Automation** - App control, web browsing, media playback
 - 💻 **Modern GUI** - Beautiful PyQt5 interface
 
+## 🔄 Live Demo
+
+![Assistant Demo](Frontend/Graphics/DEMO.gif)
+
 ## 🚀 Quick Start
 
 1. **Clone and setup**
